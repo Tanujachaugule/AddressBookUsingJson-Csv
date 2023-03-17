@@ -5,18 +5,22 @@ import java.util.Map;
 import java.util.Scanner;
 public class AddressBookList {
     public static String newBookName;
-    public static AddressBook addressBook=new AddressBook();
-    public static Map<String,AddressBook> addressBookMap = new HashMap<>();
+    public static AddressBook addressBookMain=new AddressBook();
+    public static Map<String,AddressBook> addressBookMainMap = new HashMap<>();
 
     public static Scanner scanner=new Scanner(System.in);
+    private static HashMap<Object, Object> addressBookMap;
+
     public static void addAddressBook() {            //Method to add address book
-        AddressBook addressBook = new AddressBook();
+        AddressBook addressBookMain = new AddressBook();
         System.out.println("Enter the name to add address book");
         String newBookName = scanner.next();
-        addressBookMap.put(newBookName,addressBook);
+        addressBookMap.put(newBookName,addressBookMain);
     }
     public static void display(){                   //Method to show address book
-        for (String string: addressBookMap.keySet()) {
+        for (Object Object: addressBookMap.keySet()) {
+            boolean string;
+            string = false;
             System.out.println(string);
         }
     }
@@ -24,9 +28,9 @@ public class AddressBookList {
         display();
         System.out.println("Enter the name of address book you want to select");
         String addressBookName = scanner.next();
-        for (String key: addressBookMap.keySet()) {
+        for (Object key: addressBookMap.keySet()) {
             if(addressBookName.equals(key)){
-                addressBookMap.get(addressBookName).addContactsMain(addressBookMap.get(addressBookName));
+                addressBookMap.get(addressBookName).getClass();
             }
             else {
                 System.out.println("Provided name not found");
@@ -38,7 +42,7 @@ public class AddressBookList {
         display();
         System.out.println("Kindly enter the name of address book you want to delete");
         String deleteBookName = scanner.next();
-        for (String key: addressBookMap.keySet()) {
+        for (Object key: addressBookMap.keySet()) {
             if(deleteBookName.equals(key)){
                 addressBookMap.remove(deleteBookName);
             }
@@ -51,9 +55,9 @@ public class AddressBookList {
     public static void searchPerson(){
         System.out.println("Enter the name of city");
         String inputCity= scanner.next();
-        addressBookMap.get(addressBook).person.stream()
+        addressBookMap.get(addressBookMap).person.stream()
                 .filter(city -> inputCity.equals(city.getCity()))
-                .forEach(element -> System.out.println(element));
+                .forEach(element -> System.out.println());
     }
 
     public static void main(String[] args) throws Exception {
@@ -82,4 +86,4 @@ public class AddressBookList {
             }
         }
     }
-}
+    }

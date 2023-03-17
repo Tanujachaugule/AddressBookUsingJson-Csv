@@ -5,8 +5,6 @@ package com.addressbookusingCsvanndJson;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
-
-
 public class AddressBook extends Person {
     public static AddressBook newPerson = new AddressBook();
     public static ArrayList<Person> person = new ArrayList<>();
@@ -19,16 +17,7 @@ public class AddressBook extends Person {
     public static File fileJson = new File("AddressInJsonFormat.json");
     public static FileWriter jsonWriter = null;
     public static FileReader jsonReader = null;
-
-    public AddressBook(String firstName, String lastName, String city, String state, long phoneNumber, int zip) {
-        super(firstName, lastName, city, state, phoneNumber, zip);
-    }
-
-    public AddressBook() {
-        super();
-    }
-
-    public static <ContactPerson, json, Gson> void add() throws Exception{
+    public static void add() throws Exception{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter first name");
         String firstname = scanner.nextLine();
@@ -43,19 +32,19 @@ public class AddressBook extends Person {
         System.out.println("Enter last name");
         newPerson.setLastName(scanner.nextLine());
         System.out.println("Enter address");
-        newPerson.setState(scanner.nextLine());
+        newPerson.setAddress(scanner.nextLine());
         System.out.println("Enter city");
         newPerson.setCity(scanner.nextLine());
         System.out.println("Enter state");
         newPerson.setState(scanner.nextLine());
         System.out.println("Enter zip code");
-        newPerson.setZip(Integer.parseInt(scanner.nextLine()));
+        newPerson.setZip(scanner.nextLine());
         System.out.println("Enter phone number");
-        newPerson.setPhoneNumber(Long.parseLong(scanner.nextLine()));
+        newPerson.setPhoneNumber(scanner.nextLine());
         System.out.println("Enter Email");
-        newPerson.setZip(Integer.parseInt(scanner.nextLine()));
+        newPerson.setEmail(scanner.nextLine());
         Person Person = new Person(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail());
-        person.add((Person) Person);
+        person.add(Person);
 
 //        System.out.println(person);
         //Writing in object type
@@ -95,9 +84,9 @@ public class AddressBook extends Person {
                 System.out.println("Edit state");
                 newPerson.setState(scanner.nextLine());
                 System.out.println("Edit zip code");
-                newPerson.setZip(Integer.parseInt(scanner.nextLine()));
+                newPerson.setZip(scanner.nextLine());
                 System.out.println("Edit phone number");
-                newPerson.setPhoneNumber(Long.parseLong(scanner.nextLine()));
+                newPerson.setPhoneNumber(scanner.nextLine());
                 System.out.println("Edit Email");
                 newPerson.setEmail(scanner.nextLine());
                 iterator.set(new Person(newPerson.getFirstName(),newPerson.getLastName(), newPerson.getAddress(), newPerson.getCity(), newPerson.getState(), newPerson.getZip(), newPerson.getPhoneNumber(),newPerson.getEmail()));
@@ -112,10 +101,6 @@ public class AddressBook extends Person {
             System.out.println("record not found");
         }
     }
-
-    private void setAddress(String nextLine) {
-    }
-
     public static void delete(){
         Scanner scanner = new Scanner(System.in);
         boolean found=false;
@@ -177,7 +162,7 @@ public class AddressBook extends Person {
                 .sorted(Comparator.comparing(Person::getState))
                 .forEach(System.out::println);
     }
-    public static <Gson> void readFromfile() throws Exception {
+    public static void readFromfile() throws Exception {
         if (file2.isFile()) {
             try {
                 objectStreamReader = new ObjectInputStream(new FileInputStream(file2));
@@ -187,9 +172,9 @@ public class AddressBook extends Person {
         if (fileJson.isFile()) {
             try {
                 jsonReader = new FileReader(fileJson);
-                Person Person = new Person();
+                Person contactPerson = new Person();
                 Gson gsonObj = new Gson();
-                person = gsonObj.fromJson(jsonReader, (Type) Person);
+                person = gsonObj.fromJson(jsonReader, (Type) contactPerson);
             }catch (Exception e){}
         }
     }
@@ -234,4 +219,4 @@ public class AddressBook extends Person {
             }
         }
     }
-}
+    }
